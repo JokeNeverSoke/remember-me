@@ -1,5 +1,5 @@
-import { Box } from "@chakra-ui/react";
 import React from "react";
+import { Box } from "@chakra-ui/react";
 import { useRef, useEffect } from "react";
 
 export const GameContainer: React.FC<{ fullscreen: boolean }> = ({
@@ -22,6 +22,7 @@ export const GameContainer: React.FC<{ fullscreen: boolean }> = ({
 
   return (
     <Box
+      id='game-container'
       position="relative"
       w="full"
       minW="100vw"
