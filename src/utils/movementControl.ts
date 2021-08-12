@@ -52,9 +52,21 @@ export const useMovementControl = () => {
       setStoryList(stories["1"]);
     }
     if (x + delta * 5 > scene.width && scene.right) {
-      scene.right();
+      if (typeof scene.right === "string") {
+        // @ts-ignore
+        setStoryList((p) => [stories[scene.right], ...p.slice(1)]);
+      } else {
+        scene.right();
+      }
     }
-    if (x + delta * 5 < 0 && scene.left) scene.left();
+    if (x + delta * 5 < 0 && scene.left) {
+      if (typeof scene.left === "string") {
+        // @ts-ignore
+        setStoryList((p) => [stories[scene.left], ...p.slice(1)]);
+      } else {
+        scene.left();
+      }
+    }
 
     if (rightPress) {
       setX((c) => Math.min(c + delta * 5, scene.width));

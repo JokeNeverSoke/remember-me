@@ -50,16 +50,21 @@ export const useChatTo = () => {
       await Promise.all(
         u.data.reply_text.map(async (t: string) => {
           if (/^\/set_/.test(t)) {
-            const [, name, value] = t.split("_");
           } else if (/^\/next_/.test(t)) {
-            const [, ...k] = t.split("_");
-            const kk = k.join("_");
-            setStoryQState((v) => [...v.slice(1), ...stories[kk]]);
           } else {
             await appendChat({ source: c, text: t });
           }
         })
       );
+      u.data.reply_text.forEach((t: string) => {
+        if (/^\/set_/.test(t)) {
+          const [, name, value] = t.split("_");
+        } else if (/^\/next_/.test(t)) {
+          const [, ...k] = t.split("_");
+          const kk = k.join("_");
+          setStoryQState((v) => [...v.slice(1), ...stories[kk]]);
+        }
+      });
     }
   };
 };
