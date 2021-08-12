@@ -12,7 +12,7 @@ export const talkTo = async (data: {
   patience: number;
   state: { chap: number; npc_state: number };
 }) => {
-  return await axios.post("http://1.117.193.66:5000/", data);
+  return await axios.post("/api", data);
 };
 
 export const useChatTo = () => {
