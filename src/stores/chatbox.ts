@@ -47,3 +47,8 @@ export const useAppendChat = () => {
     });
   };
 };
+
+export const chatboxLockedState = atom({
+  key: "chatboxLockedState",
+  default: false,
+});

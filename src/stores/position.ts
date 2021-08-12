@@ -5,7 +5,9 @@ export const positionState = atom<number>({
   default: 0,
 });
 
-export const movingState = atom<false | "left" | "right">({
+export const movingState = atom<
+  "idleLeft" | "idleRight" | "talking" | "walkLeft" | "walkRight"
+>({
   key: "movingState",
-  default: false,
+  default: "idleRight",
 });

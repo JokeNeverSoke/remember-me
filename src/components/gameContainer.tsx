@@ -1,6 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 import { useRef, useEffect } from "react";
+import { useDim } from "@/utils/dim";
 
 export const GameContainer: React.FC<{ fullscreen: boolean }> = ({
   children,
@@ -8,6 +9,7 @@ export const GameContainer: React.FC<{ fullscreen: boolean }> = ({
   ...boxProps
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { Overlay } = useDim();
   useEffect(() => {
     if (fullscreen && containerRef.current?.requestFullscreen) {
       containerRef.current.requestFullscreen();
@@ -22,7 +24,7 @@ export const GameContainer: React.FC<{ fullscreen: boolean }> = ({
 
   return (
     <Box
-      id='game-container'
+      id="game-container"
       position="relative"
       w="full"
       minW="100vw"
@@ -32,6 +34,7 @@ export const GameContainer: React.FC<{ fullscreen: boolean }> = ({
       bg="gray.400"
       {...boxProps}
     >
+      <Overlay />
       {children}
     </Box>
   );

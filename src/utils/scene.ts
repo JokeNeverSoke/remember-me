@@ -1,14 +1,12 @@
-export const getDisplacement = ({
-  x,
-  width,
-  windowW,
-}: {
-  x: number;
-  width: number;
-  windowW: number;
-}) => {
+import { useRecoilValue } from "recoil";
+import { positionState } from "@/stores/position";
+import { useCurrentScene } from "@/stores/scene";
+
+export const useDisplacement = () => {
+  const x = useRecoilValue(positionState);
+  const width = useCurrentScene().width;
   return {
-    x: (x / width) * windowW,
-    sceneX: (x / width) * (width - windowW) * -1,
+    charX: (x / width) * window.innerWidth,
+    sceneX: (x / width) * (width - window.innerWidth) * -1,
   };
 };

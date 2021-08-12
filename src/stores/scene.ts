@@ -1,13 +1,16 @@
-import { scenes } from "@/constants/scenes";
+import { characters } from "@/constants/characters";
 import { atom, useRecoilValue } from "recoil";
 
-export const currentSceneIdx = atom<keyof typeof scenes | null>({
-  key: "currentSceneIdx",
-  default: null,
+export const currentSceneState = atom<Scene>({
+  key: "currentSceneState",
+  default: {
+    width: 3100,
+    characters: [],
+    initX: 10,
+  },
 });
 
-export const useCurrentScene = () => {
-  const idx = useRecoilValue(currentSceneIdx);
-  if (idx) return scenes[idx];
-  return scenes.forest1;
+export const useCurrentScene = (): Scene => {
+  const scene = useRecoilValue(currentSceneState);
+  return scene;
 };

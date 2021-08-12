@@ -6,7 +6,7 @@ import {
   useRecoilBridgeAcrossReactRoots_UNSTABLE,
   useRecoilState,
 } from "recoil";
-import { CharacterPosition } from "./characterPosition";
+import { Game } from "./game";
 
 export const MainStage = () => {
   const [{ x, y }, setDim] = useState({ x: 600, y: 600 });
@@ -22,9 +22,9 @@ export const MainStage = () => {
     };
   }, []);
   return (
-    <Stage width={x} height={y} options={{ backgroundColor: 0x555555 }}>
+    <Stage width={x} height={y} options={{ backgroundColor: 0x000000 }}>
       <RecoilBridge>
-        <CharacterPosition />
+        <Game />
       </RecoilBridge>
     </Stage>
   );
