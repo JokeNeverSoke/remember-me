@@ -2,9 +2,10 @@ import mountains from "@/assets/scenes/mountains.jpg";
 import forest from "@/assets/scenes/forest.jpg";
 import bed from "@/assets/scenes/bed.png";
 import market from "@/assets/scenes/market.png";
-import butch from "@/assets/scenes/butch.png";
+import butch from "@/assets/scenes/butch.jpg";
 import book from "@/assets/scenes/book.png";
-import mnight from "@/assets/scenes/mnight.png";
+import mnight from "@/assets/scenes/mnight.jpg";
+import hut from "@/assets/scenes/hut.jpg";
 import { characters as cs } from "./characters";
 
 declare global {
@@ -207,5 +208,37 @@ export const stories: { [key: string]: StoryEvent[] } = {
       },
       duration: 1.8,
     },
+  ],
+  blah1: [
+    {
+      type: "scene",
+      scene: {
+        width: 1600,
+        initX: 600,
+        characters: [{ character: cs.hunter, x: 800 }],
+        image: hut,
+      },
+      duration: 1.8,
+    },
+    t("昨天晚上也在打猎？"),
+    h("是啊，不过最近运气不是很好，收获也没有那么可观"),
+    t("很辛苦呢，你收留我在这儿，现在需要我帮忙吗"),
+    h("不了，狩猎还是很危险的，需要专业知识。"),
+    t("的确是这样，那没办法了，你多注意安全。"),
+    t("话说你知道守护者的事情吗？"),
+    h("嗯... ...或许是和即将到来的节日有关吗？不清楚"),
+    t("这样啊... ..."),
+    {
+      type: "scene",
+      scene: {
+        width: 2000,
+        initX: 1500,
+        characters: [{ character: cs.pum, x: 1600 }],
+        image: butch,
+      },
+      duration: 1,
+    },
+    hint("可以和大家聊聊天"),
+    { type: "free" },
   ],
 };

@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { Box, Button, Center, Heading } from "@chakra-ui/react";
+import PIXI from "pixi.js";
+import { sound } from "@pixi/sound";
+import angelDream from "./assets/sounds/angel_dream.mp3";
 
 import { Chatbox } from "./components/chatbox";
 import { DevTools } from "./components/devTools";
 import { GameContainer } from "./components/gameContainer";
 import { MainStage } from "./components/mainStage";
+
+sound.add("my-sound", angelDream);
 
 function App() {
   const [f, setF] = useState(false);
@@ -18,7 +23,10 @@ function App() {
           <Button
             variant="unstyled"
             textDecor="underline"
-            onClick={() => setF((s) => !s)}
+            onClick={() => {
+              sound.play("my-sound", { loop: true });
+              setF((s) => !s);
+            }}
           >
             Start Game
           </Button>
