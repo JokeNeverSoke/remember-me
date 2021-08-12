@@ -9,7 +9,7 @@ import { storyQueueState } from "@/stores/currentD";
 import { useAppendChat } from "@/stores/chatbox";
 import { currentSceneState } from "@/stores/scene";
 import { useDim } from "@/utils/dim";
-import { positionState } from "@/stores/position";
+import { movingState, positionState } from "@/stores/position";
 import { characters } from "@/constants/characters";
 
 // export const Game = () => {
@@ -135,6 +135,7 @@ export const Game = () => {
   const [currentStoryQ, setCurrentStoryQ] = useRecoilState(storyQueueState);
   const setScene = useSetRecoilState(currentSceneState);
   const setX = useSetRecoilState(positionState);
+  const setMoving = useSetRecoilState(movingState);
   const cS = currentStoryQ[0];
   const popQ = () => setCurrentStoryQ((u) => u.slice(1));
 
@@ -151,6 +152,7 @@ export const Game = () => {
       setTimeout(() => {
         setScene(cS.scene);
         setX(cS.scene.initX);
+        setMoving("idleRight");
         toDim({ duration: half, opacity: 0 });
         popQ();
       }, half * 1000);

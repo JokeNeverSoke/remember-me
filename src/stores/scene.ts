@@ -6,7 +6,7 @@ export const currentSceneState = atom<Scene>({
   default: {
     width: 3100,
     characters: [],
-    initX: 10,
+    initX: -900,
   },
 });
 

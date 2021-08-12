@@ -30,8 +30,9 @@ export const useMovementControl = () => {
       .filter(({ x: cx }) => Math.abs(x - cx) < 48)
       .filter((c) => c.character.name !== "旅人");
     if (close.length === 1) {
+      setMState("talking");
       const target = close[0];
-      chatTo({ c: target.character, chapter: 1 });
+      chatTo({ c: target.character });
     }
   });
 

@@ -1,7 +1,8 @@
 import { characters } from "@/constants/characters";
+import { gameState } from "@/stores/game";
 import { chatboxLockedState, useAppendChat } from "@/stores/chatbox";
 import axios from "axios";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 export const talkTo = async (data: {
   text: string;
@@ -15,9 +16,12 @@ export const talkTo = async (data: {
 export const useChatTo = () => {
   const appendChat = useAppendChat();
   const l = useSetRecoilState(chatboxLockedState);
+  const [gState, setGState] = useRecoilState(gameState);
+
   const lock = () => l(true);
   const unlock = () => l(false);
-  return async ({ c, chapter }: { c: Character; chapter: number }) => {
+
+  return async ({ c }: { c: Character }) => {
     const text = await appendChat({
       type: "input",
       source: characters.traveler,
@@ -27,9 +31,15 @@ export const useChatTo = () => {
     const u = await talkTo({
       text,
       npc_id: c.id,
-      patience: 1,
-      state: { chap: chapter, npc_state: 0 },
+      // @ts-ignore
+      patience: gState.patience[c.id] ?? 1,
+      state: { chap: gState.chapter, npc_state: gState[c.id] ?? 0 },
     });
+    setGState(({ patience, ...p }) => ({
+      ...p,
+      [c.id]: u.data.state.npc_state,
+      patience: { ...patience, [c.id]: u.data.patience },
+    }));
     unlock();
     if (typeof u.data.reply_text === "string") {
       await await appendChat({ source: c, text: u.data.reply_text });

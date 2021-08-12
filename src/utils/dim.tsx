@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 
-const overlayState = atom({ key: "overlayState", default: { d: 0.5, o: 0 } });
+const overlayState = atom({ key: "overlayState", default: { d: 0.5, o: 1 } });
 
 export const useDim = () => {
   const setOS = useSetRecoilState(overlayState);

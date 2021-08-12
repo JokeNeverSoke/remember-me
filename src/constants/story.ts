@@ -99,6 +99,7 @@ export const stories: { [key: string]: StoryEvent[] } = {
       },
       duration: 1.1,
     },
+    t("*走到人物面前按下空格键进行对话。*"),
     { type: "free" },
   ],
 };
