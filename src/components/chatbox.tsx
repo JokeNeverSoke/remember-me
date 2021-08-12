@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Flex, Input, Text, Image } from "@chakra-ui/react";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown from "markdown-to-jsx";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useKeyPress } from "@/utils/keyListener";
 import {
