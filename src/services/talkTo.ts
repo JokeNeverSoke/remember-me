@@ -3,6 +3,8 @@ import { gameState } from "@/stores/game";
 import { chatboxLockedState, useAppendChat } from "@/stores/chatbox";
 import axios from "axios";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { storyQueueState } from "@/stores/currentD";
+import { stories } from "@/constants/story";
 
 export const talkTo = async (data: {
   text: string;
@@ -17,6 +19,7 @@ export const useChatTo = () => {
   const appendChat = useAppendChat();
   const l = useSetRecoilState(chatboxLockedState);
   const [gState, setGState] = useRecoilState(gameState);
+  const setStoryQState = useSetRecoilState(storyQueueState);
 
   const lock = () => l(true);
   const unlock = () => l(false);
@@ -46,8 +49,12 @@ export const useChatTo = () => {
     } else {
       await Promise.all(
         u.data.reply_text.map(async (t: string) => {
-          if (/^set_/.test(t)) {
+          if (/^\/set_/.test(t)) {
             const [, name, value] = t.split("_");
+          } else if (/^\/next_/.test(t)) {
+            const [, ...k] = t.split("_");
+            const kk = k.join("_");
+            setStoryQState((v) => [...v.slice(1), ...stories[kk]]);
           } else {
             await appendChat({ source: c, text: t });
           }
